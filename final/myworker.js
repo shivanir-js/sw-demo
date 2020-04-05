@@ -1,4 +1,3 @@
-//importScripts('serviceworker-cache-polyfill.js');
 
 self.addEventListener('install', function(evt){
     console.log("install successful");
@@ -25,10 +24,9 @@ self.addEventListener('fetch', function(evt){
     evt.respondWith(
         caches.open('images').then(function(cache){
             return cache.match(evt.request).then(function (response) {
-                console.log(evt.request)
                 console.log("Served from Service worker cache",response);
                 return response || fetch(evt.request.clone());
             });
-        }, () => {console.log("error")})
+        })
     );
 });
