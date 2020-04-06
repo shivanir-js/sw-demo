@@ -25,7 +25,7 @@ self.addEventListener('fetch', function(evt){
         caches.open('images').then(function(cache){
             return cache.match(evt.request).then(function (response) {
                 console.log("Served from Service worker cache",response);
-                return response || fetch(evt.request.clone());
+                return response || fetch(evt.request);
             });
         })
     );
